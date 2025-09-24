@@ -1,0 +1,7 @@
+{
+    "cmake.ignoreCMakeListsMissing": true,
+    "clangd.fallbackFlags": [
+        "-I${workspaceFolder}/Unity/src",
+        "-I${workspaceFolder}/src",
+    ]
+}
