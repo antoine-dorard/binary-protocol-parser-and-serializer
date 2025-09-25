@@ -51,14 +51,19 @@ TEST_RESULTS = $(patsubst $(PATH_TEST)test_%.c,$(PATH_RESULTS)test_%.txt,$(TEST_
 
 
 test: $(BUILD_PATHS) $(TEST_RESULTS)
-	@echo $(BUILDS)
 	@echo "\n-----------------------\nPASS:\n-----------------------"
 	@echo `grep -s PASS $(PATH_RESULTS)*.txt`
 	@echo "\n-----------------------\nIGNORES:\n-----------------------"
 	@echo `grep -s IGNORE $(PATH_RESULTS)*.txt`
 	@echo "\n-----------------------\n\nFAILURES:\n-----------------------"
 	@echo `grep -s FAIL $(PATH_RESULTS)*.txt`
-	@echo "\nDONE"
+	@echo "\n"
+	@if grep -s FAIL $(PATH_RESULTS)*.txt; then \
+		echo "Some tests failed"; \
+		exit 1; \
+	else \
+		echo "All tests passed!"; \
+	fi
 
 
 # Execute all executables
