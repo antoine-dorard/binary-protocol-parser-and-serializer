@@ -73,13 +73,13 @@ $(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)test_%.o $(PATH_OBJ)unity.o | $(P
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Create object files
-$(PATH_OBJ)%.o:: $(PATH_SRC)%.c | $(PATH_OBJ)
+$(PATH_OBJ)%.o: $(PATH_SRC)%.c | $(PATH_OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(PATH_OBJ)%.o:: $(PATH_TEST)%.c | $(PATH_OBJ)
+$(PATH_OBJ)%.o: $(PATH_TEST)%.c | $(PATH_OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(PATH_OBJ)%.o:: $(PATH_UNITY)%.c $(PATH_UNITY)%.h | $(PATH_OBJ)
+$(PATH_OBJ)%.o: $(PATH_UNITY)%.c $(PATH_UNITY)%.h | $(PATH_OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 
