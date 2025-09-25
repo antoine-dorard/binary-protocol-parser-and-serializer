@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "crc.h"
+#include "unity_internals.h"
 
 void setUp(void) {
     // set stuff up here
@@ -10,6 +11,7 @@ void tearDown(void) {
 }
 
 void test_crc(){
+    TEST_ASSERT_TRUE(1 == 2);
 }
 
 // not needed when using generate_test_runner.rb
