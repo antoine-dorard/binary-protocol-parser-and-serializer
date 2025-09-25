@@ -69,7 +69,7 @@ $(PATH_RESULTS)%.txt: $(PATH_BUILD)%.$(TARGET_EXTENSION) | $(PATH_RESULTS)
 $(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)%.d 
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)test_%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)test_%.d
+$(PATH_BUILD)test_%.$(TARGET_EXTENSION): $(PATH_OBJ)test_%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)test_%.d
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Create object files
