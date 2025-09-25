@@ -44,7 +44,7 @@ $(foreach file,$(SRC),$(if $(filter $(PATH_TEST)test_$(basename $(notdir $(file)
 
 
 
-all: $(BUILDS)
+all: $(BUILD_PATHS) $(BUILDS)
 
 TEST_RESULTS = $(patsubst $(PATH_TEST)test_%.c,$(PATH_RESULTS)test_%.txt,$(TEST_SRC))
 # build/results/test_crc.txt build/results/test_parser.txt
@@ -62,24 +62,24 @@ test: $(BUILD_PATHS) $(TEST_RESULTS)
 
 
 # Execute all executables
-$(PATH_RESULTS)%.txt: $(PATH_BUILD)%.$(TARGET_EXTENSION)
+$(PATH_RESULTS)%.txt: $(PATH_BUILD)%.$(TARGET_EXTENSION) | $(PATH_RESULTS)
 	-./$< > $@ 2>&1 
 
 # Create executables
-$(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)%.o $(PATH_OBJ)unity.o #$(PATHD)%.d
+$(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)%.d 
 	$(CC) $(CFLAGS) -o $@ $^
-	
-$(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)test_%.o $(PATH_OBJ)unity.o #$(PATHD)test_%.d
+
+$(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)test_%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)test_%.d
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Create object files
-$(PATH_OBJ)%.o:: $(PATH_SRC)%.c 
+$(PATH_OBJ)%.o:: $(PATH_SRC)%.c | $(PATH_OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(PATH_OBJ)%.o:: $(PATH_TEST)%.c
+$(PATH_OBJ)%.o:: $(PATH_TEST)%.c | $(PATH_OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(PATH_OBJ)%.o:: $(PATH_UNITY)%.c $(PATH_UNITY)%.h
+$(PATH_OBJ)%.o:: $(PATH_UNITY)%.c $(PATH_UNITY)%.h | $(PATH_OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 
