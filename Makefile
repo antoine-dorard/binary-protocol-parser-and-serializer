@@ -13,7 +13,7 @@ else
 endif
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic -std=c23 -O2 -I$(PATH_UNITY) -I$(PATH_SRC)
+CFLAGS = -Wall -Wextra -Werror -pedantic -std=c2x -O2 -I$(PATH_UNITY) -I$(PATH_SRC)
 CFLAGS_DEBUG = -g -O0 -fsanitize=address -fsanitize=undefined
 DEPEND_FLAGS=-MM -MG -MF
 
