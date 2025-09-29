@@ -26,9 +26,7 @@ PATH_OBJ = $(PATH_BUILD)objs/
 PATH_RESULTS = $(PATH_BUILD)results/
 
 SRC = $(wildcard $(PATH_SRC)*.c)
-OBJ = $(SRC:.c=.o)
 TEST_SRC = $(wildcard $(PATH_TEST)*.c)
-TEST_OBJ = $(TEST_SRC:.c=.o)
 
 BUILD_PATHS = $(PATH_BUILD) $(PATH_DEPENDS) $(PATH_OBJ) $(PATH_RESULTS)
 
@@ -71,6 +69,9 @@ $(PATH_RESULTS)%.txt: $(PATH_BUILD)%.$(TARGET_EXTENSION) | $(PATH_RESULTS)
 	-./$< > $@ 2>&1 
 
 # Create executables
+$(PATH_BUILD)test_%.$(TARGET_EXTENSION): $(PATH_OBJ)test_%.o $(PATH_OBJ)%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)%.d 
+	$(CC) $(CFLAGS) -o $@ $^
+
 $(PATH_BUILD)%.$(TARGET_EXTENSION): $(PATH_OBJ)%.o $(PATH_OBJ)unity.o | $(PATH_BUILD) #$(PATHD)%.d 
 	$(CC) $(CFLAGS) -o $@ $^
 
@@ -117,13 +118,8 @@ clean:
 .PRECIOUS: $(PATH_OBJ)%.o
 .PRECIOUS: $(PATH_RESULTS)%.txt
 
-# build: # TODO 
-
 debug: CFLAGS = $(CFLAGS_DEBUG)
 debug: $(TARGET)
-
-# clean:
-# 	rm -f $(OBJ) $(TEST_OBJ) $(TARGET) $(TEST_TARGET)
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem src/
