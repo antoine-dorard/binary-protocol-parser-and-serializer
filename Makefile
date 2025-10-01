@@ -55,8 +55,10 @@ test: $(BUILD_PATHS) $(TEST_RESULTS)
 	@echo `grep -s IGNORE $(PATH_RESULTS)*.txt`
 	@echo "\n-----------------------\n\nFAILURES:\n-----------------------"
 	@echo `grep -s FAIL $(PATH_RESULTS)*.txt`
+	@echo "\n-----------------------\n\nERRORS:\n-----------------------"
+	@VAR=$$(grep -s -l Aborted $(PATH_RESULTS)*.txt) && echo `cat $$VAR`
 	@echo "\n"
-	@if grep -s FAIL $(PATH_RESULTS)*.txt; then \
+	@if grep -s FAIL $(PATH_RESULTS)*.txt || grep -s Aborted $(PATH_RESULTS)*.txt; then \
 		echo "Some tests failed"; \
 		exit 1; \
 	else \
