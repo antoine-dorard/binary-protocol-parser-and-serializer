@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/antoine/dev/learn-c/CS_Embedded_101/binary-protocol-parser-and-serializer/src",
-      "program": "/home/antoine/dev/learn-c/CS_Embedded_101/binary-protocol-parser-and-serializer/src/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/build/test_crc.out",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
