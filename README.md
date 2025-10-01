@@ -23,6 +23,15 @@ This project uses [Unity](https://github.com/ThrowTheSwitch/Unity) for unit test
 make test
 ```
 
+## Debugging
+Use `make debug` to build the test files with the debug compiler flags.
+Run gdb to debug, or the integrated C/C++ Runner extension in vscode.
+
+At the moment, the current file to debug is manually specified in `launch.json`. If you want to debug a specific file, change the `program` property of the `C/C++ Runner: Debug Session` configuration.
+
+> [!NOTE]
+> If `make debug` or any other step breaks, try to `make clean` before trying again.
+
 ## Contributions
 This project is closed for contributions. However, I welcome feedback and suggestions via GitHub issues.
 
