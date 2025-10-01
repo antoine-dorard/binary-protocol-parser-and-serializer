@@ -14,8 +14,8 @@ endif
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pedantic -std=c2x -O2 -I$(PATH_UNITY) -I$(PATH_SRC) -DUNITY_INCLUDE_PRINT_FORMATTED
-CFLAGS_DEBUG = -g -O0 -fsanitize=address -fsanitize=undefined
-DEPEND_FLAGS=-MM -MG -MF
+CFLAGS_DEBUG = -g -O0 -fsanitize=address -std=c2x -fsanitize=undefined -Wall -Wextra -Werror -pedantic -I$(PATH_UNITY) -I$(PATH_SRC) -DUNITY_INCLUDE_PRINT_FORMATTED
+DEPEND_FLAGS= -MM -MG -MF
 
 PATH_UNITY = Unity/src/
 PATH_SRC = src/
@@ -119,7 +119,7 @@ clean:
 .PRECIOUS: $(PATH_RESULTS)%.txt
 
 debug: CFLAGS = $(CFLAGS_DEBUG)
-debug: $(TARGET)
+debug: all
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem src/
