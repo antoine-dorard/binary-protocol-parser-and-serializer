@@ -41,7 +41,6 @@ BUILDS = $(patsubst $(PATH_TEST)test_%.c,$(PATH_BUILD)test_%.$(TARGET_EXTENSION)
 $(foreach file,$(SRC),$(if $(filter $(PATH_TEST)test_$(basename $(notdir $(file))).c,$(TEST_SRC)),,$(error No test file for $(file))))
 
 
-
 all: $(BUILD_PATHS) $(BUILDS)
 
 TEST_RESULTS = $(patsubst $(PATH_TEST)test_%.c,$(PATH_RESULTS)test_%.txt,$(TEST_SRC))
@@ -56,14 +55,9 @@ test: $(BUILD_PATHS) $(TEST_RESULTS)
 	@echo "\n-----------------------\n\nFAILURES:\n-----------------------"
 	@echo `grep -s FAIL $(PATH_RESULTS)*.txt`
 	@echo "\n-----------------------\n\nERRORS:\n-----------------------"
-	@VAR=$$(grep -s -l Aborted $(PATH_RESULTS)*.txt) && echo `cat $$VAR`
+	@VAR=$$(grep -s -l Aborted $(PATH_RESULTS)*.txt); if [ -n "$$VAR" ]; then echo `cat $$VAR`; fi
 	@echo "\n"
-	@if grep -s FAIL $(PATH_RESULTS)*.txt || grep -s Aborted $(PATH_RESULTS)*.txt; then \
-		echo "Some tests failed"; \
-		exit 1; \
-	else \
-		echo "All tests passed!"; \
-	fi
+	@if grep -s FAIL $(PATH_RESULTS)*.txt || grep -s Aborted $(PATH_RESULTS)*.txt; then echo "Some tests failed"; exit 1; else echo "All tests passed!"; fi
 
 
 # Execute all executables
