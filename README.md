@@ -3,6 +3,11 @@
 The purpose of this project is to familiarise myself with low-level C programming concepts essential for embedded systems development. This ByteStream Protocol implementation serves as a practical introduction to memory management, pointer arithmetic, bit manipulation, endianness handling, and binary protocol design—core skills needed for embedded firmware development.
 Rather than learning C in isolation, this project applies fundamental concepts through a real-world scenario: building a robust communication protocol similar to those used in automotive, aerospace, and IoT systems. The implementation emphasizes embedded best practices including static memory allocation, defensive programming, comprehensive error handling, and professional development workflows.
 
+## Implemented features
+- [x] CRC
+- [ ] Parser
+- [ ] Ring Buffer
+
 ## Setup
 
 Install the repo:
